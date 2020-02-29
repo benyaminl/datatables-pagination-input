@@ -47,7 +47,7 @@
 
 	function calcPages(oSettings) {
 		return Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength);
-	}
+    }
 
 	var firstClassName = 'first';
 	var previousClassName = 'previous';
@@ -74,9 +74,9 @@
 			var info = language.info || 'Page _INPUT_ of _TOTAL_';
 
 			nFirst.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="0" tabindex="0" class="page-link">'+ language.sFirst + '</a>';
-			nPrevious.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="0" tabindex="0" class="page-link">'+ language.sPrevious + '</a>';
-			nNext.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="0" tabindex="0" class="page-link">'+ language.sNext + '</a>';
-			nLast.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="0" tabindex="0" class="page-link">'+ language.sLast + '</a>';
+			nPrevious.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="1" tabindex="0" class="page-link">'+ language.sPrevious + '</a>';
+			nNext.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="2" tabindex="0" class="page-link">'+ language.sNext + '</a>';
+			nLast.innerHTML = '<a href="#'+oSettings.nTable.id+'" aria-controls="'+oSettings.nTable.id+'" data-dt-idx="3" tabindex="0" class="page-link">'+ language.sLast + '</a>';
 
 			nFirst.className = firstClassName + ' ' + classes.sPageButton;
 			nPrevious.className = previousClassName + ' ' + classes.sPageButton;
@@ -113,7 +113,7 @@
             nPaging.appendChild(nContainer);
 
 			$(nFirst).click(function() {
-				var iCurrentPage = calcCurrentPage(oSettings);
+                var iCurrentPage = calcCurrentPage(oSettings);
 				if (iCurrentPage !== 1) {
 					oSettings.oApi._fnPageChange(oSettings, 'first');
 					fnCallbackDraw(oSettings);
@@ -121,7 +121,7 @@
 			});
 
 			$(nPrevious).click(function() {
-				var iCurrentPage = calcCurrentPage(oSettings);
+                var iCurrentPage = calcCurrentPage(oSettings);
 				if (iCurrentPage !== 1) {
 					oSettings.oApi._fnPageChange(oSettings, 'previous');
 					fnCallbackDraw(oSettings);
@@ -129,7 +129,7 @@
 			});
 
 			$(nNext).click(function() {
-				var iCurrentPage = calcCurrentPage(oSettings);
+                var iCurrentPage = calcCurrentPage(oSettings);
 				if (iCurrentPage !== calcPages(oSettings)) {
 					oSettings.oApi._fnPageChange(oSettings, 'next');
 					fnCallbackDraw(oSettings);
@@ -169,7 +169,7 @@
 				}
 
 				oSettings._iDisplayStart = iNewStart;
-				fnCallbackDraw(oSettings);
+                fnCallbackDraw(oSettings);
 			});
 
 			// Take the brutal approach to cancelling text selection.
@@ -198,27 +198,27 @@
 				return;
 			}
 
-			var disableClasses = calcDisableClasses(oSettings);
-
+            var disableClasses = calcDisableClasses(oSettings);
+            
 			$(an).show();
 
 			// Enable/Disable `first` button.
-			$(an).children('.' + firstClassName)
+			$(an).children("ul.pagination").children('.' + firstClassName)
 				.removeClass(oSettings.oClasses.sPageButtonDisabled)
 				.addClass(disableClasses[firstClassName]);
 
 			// Enable/Disable `prev` button.
-			$(an).children('.' + previousClassName)
+			$(an).children("ul.pagination").children('.' + previousClassName)
 				.removeClass(oSettings.oClasses.sPageButtonDisabled)
 				.addClass(disableClasses[previousClassName]);
 
 			// Enable/Disable `next` button.
-			$(an).children('.' + nextClassName)
+			$(an).children("ul.pagination").children('.' + nextClassName)
 				.removeClass(oSettings.oClasses.sPageButtonDisabled)
 				.addClass(disableClasses[nextClassName]);
 
 			// Enable/Disable `last` button.
-			$(an).children('.' + lastClassName)
+			$(an).children("ul.pagination").children('.' + lastClassName)
 				.removeClass(oSettings.oClasses.sPageButtonDisabled)
 				.addClass(disableClasses[lastClassName]);
 
